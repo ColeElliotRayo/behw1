@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block title %}
-    My Site - About
+    Graph
 {% endblock title %}
 
 
 {% block content %}
 
-<p>I'm Cole Rayo.</p>
+{{ line_chart | safe}}
 
 {% endblock content %}
 

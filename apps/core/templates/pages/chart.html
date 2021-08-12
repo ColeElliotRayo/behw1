@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Chart
+{% endblock title %}
+
+
+{% block content %}
+
+<table>
+    <thead> <tr><th>Name</th> <th>Last Updated</th><th>Primary language</th><th>Size</th></tr> </thead>
+    <tbody>
+        {% for repo_dict in github_repos %}
+    <tr>
+        <td>{{ repo_dict.name }}</td>
+        <td>{{ repo_dict.updated_at }}</td>
+        <td>{{ repo_dict.language }}</td>
+        <td>{{ repo_dict.size }} K</td>
+    </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock content %}
+
+

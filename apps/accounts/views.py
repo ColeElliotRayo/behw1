@@ -87,4 +87,3 @@ def edit_profile(request):
         'form': form,
     }
     return render(request, 'accounts/edit_profile.html', context)
-
