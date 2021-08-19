@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 import pygal
+from django.utils.dateparse import parse_datetime
 
 # Two example views. Change or delete as necessary.
 def home(request):
@@ -20,11 +21,12 @@ def graph(request):
     for repo_stat in repo_list:
         size = repo_stat["size"]
         repo_name = repo_stat["name"]
+
         line_chart.add(repo_name,  size)
 
     context = {
     "github_repos": repo_list,
-    "line_chart": line_chart.render(),
+    "line_chart": line_chart.render().decode("utf8"),
     }
 
     return render(request, 'pages/graph.html', context)
@@ -33,6 +35,9 @@ def graph(request):
 def chart(request):
     response = requests.get("https://api.github.com/users/ColeElliotRayo/repos")
     repo_list = response.json()
+
+    for repo_stat in repo_list:
+        repo_stat["formatted_updated_at"] = parse_datetime(repo_stat["updated_at"]).strftime('%Y %m %d')
     
     context = {
         "github_repos": repo_list,
