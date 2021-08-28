@@ -37,7 +37,7 @@ def chart(request):
     repo_list = response.json()
 
     for repo_stat in repo_list:
-        repo_stat["formatted_updated_at"] = parse_datetime(repo_stat["updated_at"]).strftime('%Y %m %d')
+        repo_stat["formatted_updated_at"] = parse_datetime(repo_stat["updated_at"]).strftime('%m-%d-%Y')
     
     context = {
         "github_repos": repo_list,
